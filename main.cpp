@@ -1,10 +1,11 @@
 #include <Windows.h>
 #include <iostream>
 #include <stdio.h>
+#include <string>
 
 int main() {
     
-    printf("Welcome to Plutonium Zombie Cheat, press any key when you're ready and the game has started \n");
+    std::cout << "Welcome to Plutonium Zombie Cheat, press any key when you're ready and the game has started \n";
     system("pause");
     LPCUWSTR gameWindow = L"bin\\plutonium-bootstrapper-win32.exe";
     HWND hWnd = FindWindow(0, gameWindow);
@@ -19,10 +20,28 @@ int main() {
     if (hProc) {
         
         LPVOID cash_address = (LPVOID)0x02347D68;
-        DWORD offset = sizeof(999999);
-        int gay = 999999;
-        if (WriteProcessMemory(hProc, cash_address, &gay, offset, NULL)){
-            std::cout << "based\n";
+        LPVOID health_address = (LPVOID)0x021C1568;
+        LPVOID first_gun_address = (LPVOID)0x02342BCC;
+        LPVOID second_gun_address = (LPVOID)0x02342BD4;
+        int second_gun_ammo = 999999;
+        int health = 999;
+        int first_gun_ammo = 999999;
+        DWORD first_gun_offset = sizeof(first_gun_ammo);
+        DWORD second_gun_offset = sizeof(second_gun_ammo);
+        DWORD health_offset = sizeof(health);
+        int cash = 999999;
+        DWORD cash_offset = sizeof(cash);
+        
+        if (WriteProcessMemory(hProc, cash_address, &cash, cash_offset, NULL)){
+            std::cout << "Cash set to: " + std::to_string(cash) << std::endl;
+            do
+            {
+                WriteProcessMemory(hProc, health_address, &health, health_offset, NULL);
+                WriteProcessMemory(hProc, first_gun_address, &first_gun_ammo, first_gun_offset, NULL);
+                WriteProcessMemory(hProc, second_gun_address, &second_gun_ammo, second_gun_offset, NULL);
+
+
+            } while (hProc);
         }
         else {
             std::cerr << "Couldn't read process memory:" << GetLastError() << std::endl;
