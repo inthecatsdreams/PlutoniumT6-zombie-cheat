@@ -5,3 +5,4 @@ a cheat for plutonium zombie
 - god mode
 - unlimited ammo
 - $999999
+- FOV set to 120
