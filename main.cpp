@@ -23,17 +23,22 @@ int main() {
         LPVOID health_address = (LPVOID)0x021C1568;
         LPVOID first_gun_address = (LPVOID)0x02342BCC;
         LPVOID second_gun_address = (LPVOID)0x02342BD4;
+        LPVOID fov_address = (LPVOID)0x02A139C0;
         int second_gun_ammo = 999999;
+        float fov = 120;
+        int cash = 999999;
         int health = 999;
         int first_gun_ammo = 999999;
         DWORD first_gun_offset = sizeof(first_gun_ammo);
         DWORD second_gun_offset = sizeof(second_gun_ammo);
         DWORD health_offset = sizeof(health);
-        int cash = 999999;
+        DWORD fov_offset = sizeof(fov);
         DWORD cash_offset = sizeof(cash);
         
-        if (WriteProcessMemory(hProc, cash_address, &cash, cash_offset, NULL)){
+        if (WriteProcessMemory(hProc, cash_address, &cash, cash_offset, NULL) && WriteProcessMemory(hProc, fov_address, &fov, fov_offset, NULL)){
             std::cout << "Cash set to: " + std::to_string(cash) << std::endl;
+            std::cout << "FOV set to: " + std::to_string(fov) << std::endl;
+                    
             do
             {
                 WriteProcessMemory(hProc, health_address, &health, health_offset, NULL);
