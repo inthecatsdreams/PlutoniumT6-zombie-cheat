@@ -19,16 +19,22 @@ int main() {
     HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pId);
     if (hProc) {
         
+        // Addresses
         LPVOID cash_address = (LPVOID)0x02347D68;
         LPVOID health_address = (LPVOID)0x021C1568;
         LPVOID first_gun_address = (LPVOID)0x02342BCC;
         LPVOID second_gun_address = (LPVOID)0x02342BD4;
         LPVOID fov_address = (LPVOID)0x02A139C0;
+        
+        // Values we want
         int second_gun_ammo = 999999;
         float fov = 120;
         int cash = 999999;
         int health = 999;
         int first_gun_ammo = 999999;
+        
+        
+        // Offsets
         DWORD first_gun_offset = sizeof(first_gun_ammo);
         DWORD second_gun_offset = sizeof(second_gun_ammo);
         DWORD health_offset = sizeof(health);
@@ -57,7 +63,6 @@ int main() {
         std::cerr << "Couldn't open process " << pId << ": " << GetLastError() << std::endl;
     }
 
-    std::getchar();
     
 
 
