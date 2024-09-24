@@ -7,7 +7,7 @@ int main() {
     
     std::cout << "Welcome to Plutonium Zombie Cheat, press any key when you're ready and the game has started \n";
     system("pause");
-    LPCUWSTR gameWindow = L"bin\\plutonium-bootstrapper-win32.exe";
+    LPCUWSTR gameWindow = L"Plutonium r4060";
     HWND hWnd = FindWindow(0, gameWindow);
     DWORD pId;
     if (hWnd == 0) {
@@ -50,6 +50,7 @@ int main() {
                 WriteProcessMemory(hProc, health_address, &health, health_offset, NULL);
                 WriteProcessMemory(hProc, first_gun_address, &first_gun_ammo, first_gun_offset, NULL);
                 WriteProcessMemory(hProc, second_gun_address, &second_gun_ammo, second_gun_offset, NULL);
+                Sleep(1);
 
 
             } while (hProc);
